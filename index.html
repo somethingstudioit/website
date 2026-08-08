@@ -16,7 +16,8 @@
 
 			/* Design di riferimento: frame Figma "COMING SOON" 1512x982.
        Le dimensioni orizzontali scalano in vw (px / 15.12); le distanze
-       verticali sono quelle esatte del frame. */
+       verticali sono esatte a 982px di altezza e si comprimono in proporzione
+       su viewport più bassi, così la pagina non scrolla mai (footer sempre visibile). */
 
 			* {
 				margin: 0;
@@ -100,7 +101,9 @@
 			}
 
 			h1 {
-				margin-top: 133px;
+				/* 133px @982h; sotto si comprime (contenuto fisso ~510px, quota 28.4% dello spazio libero) */
+				margin-top: clamp(0px, calc((100vh - 510px) * 0.284), 133px);
+				margin-top: clamp(0px, calc((100dvh - 510px) * 0.284), 133px);
 				padding-inline: var(--px);
 				font-family:
 					'aktiv-grotesk', 'Aktiv Grotesk', 'Aktiv Grotesk Trial', 'Inter', 'Helvetica Neue',
@@ -141,8 +144,11 @@
 
 			/* Contatti: colonna etichette + colonna valori, blocco centrato (688px @1512) */
 			.contact {
-				margin-top: 142px;
-				margin-bottom: 194px;
+				/* 142px e 194px @982h; quote 30.3% e 41.4% dello spazio libero */
+				margin-top: clamp(0px, calc((100vh - 510px) * 0.303), 142px);
+				margin-top: clamp(0px, calc((100dvh - 510px) * 0.303), 142px);
+				margin-bottom: clamp(0px, calc((100vh - 510px) * 0.414), 194px);
+				margin-bottom: clamp(0px, calc((100dvh - 510px) * 0.414), 194px);
 				align-self: center;
 				display: grid;
 				/* colonna etichette a contenuto + gap: con i testi IT i valori cadono a 820px @1512 come nel design */
